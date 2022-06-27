@@ -1,4 +1,4 @@
-//agustin no olvides buildear
+//tp3 actualizado, ya compila y hace todo bien =D
 #include <stdio.h>
 #include <stdlib.h>
 #include "LinkedList.h"
@@ -18,24 +18,24 @@ int controller_loadFromText(char* path , LinkedList* pArrayListPassenger)
 {
 	FILE* pArchivo;
 	int result;
-	int retornoo = -1;//doble o porque con 1 sola no me toma
+	int retorna = -1;
 
 	if(path != NULL && pArrayListPassenger != NULL)
 	{
-		retornoo = 0;
+		retorna = 0;
 		pArchivo = fopen(path, "r");
 		if(pArchivo != NULL)
 		{
 			result = parser_PassengerFromText(pArchivo, pArrayListPassenger);
 			if(result == 1)
 			{
-				retornoo = 1;
+				retorna = 1;
 			}
 			fclose(pArchivo);
 		}
 	}
 
-	return retornoo;
+	return retorna;
 }
 
 /** \brief Carga los datos de los pasajeros desde el archivo data.csv (modo binario).
@@ -49,18 +49,18 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListPassenger)
 {
 	FILE* pArchivo;
 	int result;
-	int retornoo = -1;
+	int retorna = -1;
 
 	if(path != NULL && pArrayListPassenger != NULL)
 	{
-		retornoo = 0;
+		retorna = 0;
 		pArchivo = fopen(path, "rb");
 		if(pArchivo != NULL)
 		{
 			result = parser_PassengerFromBinary(pArchivo, pArrayListPassenger);
 			if(result == 1)
 			{
-				retornoo = 1;
+				retorna = 1;
 			}
 			else
 			{
@@ -70,7 +70,7 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListPassenger)
 		}
 	}
 
-	return retornoo;
+	return retorna;
 }
 
 /** \brief Alta de pasajero
@@ -83,19 +83,19 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListPassenger)
 int controller_addPassenger(LinkedList* pArrayListPassenger, int lastId)
 {
 	Passenger* nuevoPasajero;
-	int retornoo = -1;
+	int retorna = -1;
 
 	if(pArrayListPassenger != NULL)
 	{
-		retornoo = 0;
+		retorna = 0;
 		nuevoPasajero = Passenger_requestData(lastId);
 		if(nuevoPasajero != NULL)
 		{
 			ll_add(pArrayListPassenger, nuevoPasajero);
-			retornoo = 1;
+			retorna = 1;
 		}
 	}
-    return retornoo;
+    return retorna;
 }
 
 /** \brief Modificar datos de pasajero
@@ -133,11 +133,11 @@ int controller_ListPassenger(LinkedList* pArrayListPassenger)
 {
 	Passenger* lecturaPasajeros;
 	int cantidadPasajeros;
-	int retornoo = -1;
+	int retorna = -1;
 
 	if(pArrayListPassenger != NULL)
 	{
-		retornoo = 0;
+		retorna = 0;
 		cantidadPasajeros = ll_len(pArrayListPassenger);
 		printf("**//////**///////////////////**////////////////**/////////////////**//////////////**///////////////**///////////////////**\n");
 		printf("||   ID   ||     NOMBRE     ||    APELLIDO    ||     PRECIO     ||CODIGO DE VUELO||TIPO DE PASAJERO||ESTADO DEL VUELO||\n");
@@ -148,12 +148,12 @@ int controller_ListPassenger(LinkedList* pArrayListPassenger)
 			if(lecturaPasajeros != NULL)
 			{
 				Passenger_listOne(lecturaPasajeros);
-				retornoo = 1;
+				retorna = 1;
 			}
 		}
 	}
 
-	return retornoo;
+	return retorna;
 }
 
 /** \brief Ordenar pasajeros
@@ -168,11 +168,11 @@ int controller_sortPassenger(LinkedList* pArrayListPassenger)
 	int opcion;
 	int orden;
 	int result;
-	int retornoo = -1;
+	int retorna = -1;
 
 	if(pArrayListPassenger != NULL)
 	{
-		retornoo = 0;
+		retorna = 0;
 		do
 		{
 			printf("1. Ordenar por ID.\n");
@@ -273,7 +273,7 @@ int controller_sortPassenger(LinkedList* pArrayListPassenger)
 		}while(opcion != 8);
 	}
 
-	return retornoo;
+	return retorna;
 }
 
 /** \brief Guarda los datos de los pasajeros en el archivo data.csv (modo texto).
@@ -283,11 +283,11 @@ int controller_sortPassenger(LinkedList* pArrayListPassenger)
  * \return int
  *
  */
-int controller_saveAsText(char* path , LinkedList* pArrayListPassenger)//ESTO
+int controller_saveAsText(char* path , LinkedList* pArrayListPassenger)
 {
 	FILE* pArchivo;
 	Passenger* pPassenger;
-	int retornoo = -1;
+	int retorna = -1;
 	int cantidadPasajeros;
 	int id;
 	char nombre[50];
@@ -302,7 +302,7 @@ int controller_saveAsText(char* path , LinkedList* pArrayListPassenger)//ESTO
 	pArchivo = fopen(path, "w");
 	if(pArchivo != NULL)
 	{
-		retornoo = 1;
+		retorna = 1;
 		cantidadPasajeros = ll_len(pArrayListPassenger);
 		for(int i=1; i<cantidadPasajeros; i++)
 		{
@@ -328,13 +328,13 @@ int controller_saveAsText(char* path , LinkedList* pArrayListPassenger)//ESTO
 			else
 			{
 				printf("No se pudo guardar un pasajero\n");
-				retornoo = 0;
+				retorna = 0;
 			}
 		}
 		fclose(pArchivo);
 	}
 
-    return retornoo;
+    return retorna;
 }
 
 /** \brief Guarda los datos de los pasajeros en el archivo data.csv (modo binario).
@@ -346,19 +346,48 @@ int controller_saveAsText(char* path , LinkedList* pArrayListPassenger)//ESTO
  */
 int controller_saveAsBinary(char* path , LinkedList* pArrayListPassenger)
 {
-    return 1;
+    int retorna;
+    int i;
+    int len;
+    FILE* pArchivo;
+    Passenger* auxiliarPasajero;
+    retorna = -1;
+    auxiliarPasajero = NULL;
+    if(path!=NULL && pArrayListPassenger!=NULL)
+    {
+        len = ll_len(pArrayListPassenger);
+        pArchivo = fopen(path,"wb");
+
+        if(pArchivo!= NULL && len>0)
+        {
+            for(i=0; i<len ;i++)
+            {
+            	auxiliarPasajero = (Passenger*) ll_get(pArrayListPassenger,i);
+                if(auxiliarPasajero!=NULL)
+                {
+                    fwrite(auxiliarPasajero,sizeof(Passenger),1,pArchivo);
+                    retorna=1;
+                }
+            }
+        }
+        else
+        {
+            printf("Error al abrir el archivo\n");
+        }
+        fclose(pArchivo);
+    }
+    return retorna;
 }
 
 int controller_getLastID(char* path)
 {
 	FILE* pArchivo;
 	int ultimoId = -1;
-	printf("Llego a segunda funcion\n");
 	if(path != NULL)
-	{printf("Path no es nulo\n");
+	{
 		pArchivo = fopen(path, "rb");
 		if(pArchivo != NULL)
-		{printf("obtengo el ultimo id\n");
+		{
 			fread(&ultimoId, sizeof(int), 1, pArchivo);
 			fclose(pArchivo);
 		}
@@ -376,13 +405,11 @@ int controller_saveLastID(char* path, LinkedList* pArrayListPassenger)
 	int maxId = 0;
 	int cantidadPasajeros;
 	int flag = 0;
-	printf("Entre en la funcion\n");
 	if(path != NULL && pArrayListPassenger != NULL)
-	{printf("Path y pArrayListPassenger no son nulos\n");
+	{
 		ultimoId = controller_getLastID(path);
-		printf("Valor de ultimo Id %d\n", ultimoId);
 			if(ll_isEmpty(pArrayListPassenger)==0)
-			{printf("pArrayListPassenger esta cargada\n");
+			{
 				cantidadPasajeros = ll_len(pArrayListPassenger);
 				for(int i=0; i<cantidadPasajeros; i++)
 				{
@@ -397,10 +424,10 @@ int controller_saveLastID(char* path, LinkedList* pArrayListPassenger)
 					}
 				}
 				if(maxId > ultimoId)
-				{printf("El valor maximo es mayor al anterior\n");
+				{
 					pArchivo = fopen(path, "wb");
 					if(pArchivo != NULL)
-					{printf("Se escribio el nuevo valor\n");
+					{
 						fwrite(&maxId, sizeof(int), 1, pArchivo);
 						fclose(pArchivo);
 						flag = 1;
@@ -408,7 +435,7 @@ int controller_saveLastID(char* path, LinkedList* pArrayListPassenger)
 				}
 			}
 			if(flag == 0)
-			{printf("el valor maximo no es mayor al ultimo id\n");
+			{
 				maxId = ultimoId;
 			}
 	}

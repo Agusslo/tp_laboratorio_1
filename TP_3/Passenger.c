@@ -1,12 +1,12 @@
 #include "Passenger.h"
 #include "InputsDatos.h"
-#define ClaseEconomica "1"
-#define ClaseExclusiva "2"
-#define PrimeraClase "3"
-#define EstadoAterrizaje "1"
-#define EstatusDemora "2"
-#define EstatusEnHora "3"
-#define EstatusEnVuelo "4"
+#define ECONOMY_CLASS "1"
+#define EXECUTIVE_CLASS "2"
+#define FIRST_CLASS "3"
+#define ATERRIZADO_STATUS "1"
+#define DEMORADO_STATUS "2"
+#define EN_HORARIO_STATUS "3"
+#define EN_VUELO_STATUS "4"
 
 Passenger* Passenger_new()
 {
@@ -113,9 +113,9 @@ int Passenger_compareByID(void* p1, void* p2)
 	int id2;
 	Passenger* pasajero1;
 	Passenger* pasajero2;
-	int comparar;
+	int compare;
 
-	comparar = 0;
+	compare = 0;
 	pasajero1 = (Passenger*) p1;
 	pasajero2 = (Passenger*) p2;
 
@@ -124,17 +124,17 @@ int Passenger_compareByID(void* p1, void* p2)
 
 	if(id1 > id2)
 	{
-		comparar = 1;
+		compare = 1;
 	}
 	else
 	{
 		if(id1 < id2)
 		{
-			comparar = -1;
+			compare = -1;
 		}
 	}
 
-	return comparar;
+	return compare;
 }
 
 int Passenger_compareByName(void* p1, void* p2)
@@ -199,9 +199,9 @@ int Passenger_compareByPrice(void* p1, void* p2)
 	float price2;
 	Passenger* pasajero1;
 	Passenger* pasajero2;
-	int comparar;
+	int compare;
 
-	comparar = 0;
+	compare = 0;
 	pasajero1 = (Passenger*) p1;
 	pasajero2 = (Passenger*) p2;
 
@@ -210,17 +210,17 @@ int Passenger_compareByPrice(void* p1, void* p2)
 
 	if(price1 > price2)
 	{
-		comparar = 1;
+		compare = 1;
 	}
 	else
 	{
 		if(price1 < price2)
 		{
-			comparar = -1;
+			compare = -1;
 		}
 	}
 
-	return comparar;
+	return compare;
 }
 
 int Passenger_compareByFlyCode(void* p1, void* p2)
@@ -257,9 +257,9 @@ int Passenger_compareByTypePassenger(void* p1, void* p2)
 	int tipoPasajero2;
 	Passenger* pasajero1;
 	Passenger* pasajero2;
-	int comparar;
+	int compare;
 
-	comparar = 0;
+	compare = 0;
 	pasajero1 = (Passenger*) p1;
 	pasajero2 = (Passenger*) p2;
 
@@ -268,17 +268,17 @@ int Passenger_compareByTypePassenger(void* p1, void* p2)
 
 	if(tipoPasajero1 > tipoPasajero2)
 	{
-		comparar = 1;
+		compare = 1;
 	}
 	else
 	{
 		if(tipoPasajero1 < tipoPasajero2)
 		{
-			comparar = -1;
+			compare = -1;
 		}
 	}
 
-	return comparar;
+	return compare;
 }
 int Passenger_compareByStatusFlight(void* p1, void* p2)
 {
@@ -286,9 +286,9 @@ int Passenger_compareByStatusFlight(void* p1, void* p2)
 	int estadoVuelo2;
 	Passenger* pasajero1;
 	Passenger* pasajero2;
-	int comparar;
+	int compare;
 
-	comparar = 0;
+	compare = 0;
 	pasajero1 = (Passenger*) p1;
 	pasajero2 = (Passenger*) p2;
 
@@ -297,17 +297,17 @@ int Passenger_compareByStatusFlight(void* p1, void* p2)
 
 	if(estadoVuelo1 > estadoVuelo2)
 	{
-		comparar = 1;
+		compare = 1;
 	}
 	else
 	{
 		if(estadoVuelo1 < estadoVuelo2)
 		{
-			comparar = -1;
+			compare = -1;
 		}
 	}
 
-	return comparar;
+	return compare;
 }
 
 void Passenger_listOne(Passenger* this)
@@ -349,287 +349,287 @@ void Passenger_listOne(Passenger* this)
 
 int Passenger_setId(Passenger* this,int id)
 {
-	int retornoo = -1;
+	int retorna = -1;
 
 	if(this != NULL && id > 0)
 	{
-		retornoo = 0;
+		retorna = 0;
 		this->id = id;
 	}
-	return retornoo;
+	return retorna;
 }
 
 int Passenger_getId(Passenger* this,int* id)
 {
-	int retornooo = -1;
+	int retorna = -1;
 
 	if(this != NULL && id != NULL)
 	{
-		retornooo = 0;
+		retorna = 0;
 		*id = this->id;
 	}
-	return retornooo;
+	return retorna;
 }
 
 int Passenger_setNombre(Passenger* this,char* nombre)
 {
-	int retornooo = -1;
+	int retorna = -1;
 
 	if(this != NULL && nombre != NULL)
 	{
-		retornooo = 0;
+		retorna = 0;
 		strcpy(this->nombre, nombre);
 	}
-	return retornooo;
+	return retorna;
 }
 
 int Passenger_getNombre(Passenger* this,char* nombre)
 {
-	int retornooo = -1;
+	int retorna = -1;
 
 	if(this != NULL && nombre != NULL)
 	{
-		retornooo = 0;
+		retorna = 0;
 		strcpy(nombre, this->nombre);
 	}
-	return retornooo;
+	return retorna;
 }
 
 int Passenger_setApellido(Passenger* this,char* apellido)
 {
-	int retornooo = -1;
+	int retorna = -1;
 
 	if(this != NULL && apellido != NULL)
 	{
-		retornooo = 0;
+		retorna = 0;
 		strcpy(this->apellido, apellido);
 	}
-	return retornooo;
+	return retorna;
 }
 
 int Passenger_getApellido(Passenger* this,char* apellido)
 {
-	int retornooo = -1;
+	int retorna = -1;
 
 	if(this != NULL && apellido != NULL)
 	{
-		retornooo = 0;
+		retorna = 0;
 		strcpy(apellido, this->apellido);
 	}
-	return retornooo;
+	return retorna;
 }
 
 int Passenger_setCodigoVuelo(Passenger* this,char* codigoVuelo)
 {
-	int retornooo = -1;
+	int retorna = -1;
 
 	if(this != NULL && codigoVuelo != NULL)
 	{
-		retornooo = 0;
+		retorna = 0;
 		strcpy(this->codigoVuelo, codigoVuelo);
 	}
-	return retornooo;
+	return retorna;
 }
 
 int Passenger_getCodigoVuelo(Passenger* this,char* codigoVuelo)
 {
-	int retornooo = -1;
+	int retorna = -1;
 
 	if(this != NULL && codigoVuelo != NULL)
 	{
-		retornooo = 0;
+		retorna = 0;
 		strcpy(codigoVuelo, this->codigoVuelo);
 	}
-	return retornooo;
+	return retorna;
 }
 
 int Passenger_setTipoPasajero(Passenger* this,int tipoPasajero)
 {
-	int retornooo = -1;
+	int retorna = -1;
 
 	if(this != NULL && tipoPasajero > 0)
 	{
-		retornooo = 0;
+		retorna = 0;
 		this->tipoPasajero = tipoPasajero;
 	}
-	return retornooo;
+	return retorna;
 }
 
 int Passenger_getTipoPasajero(Passenger* this,int* tipoPasajero)
 {
-	int retornooo = -1;
+	int retorna = -1;
 
 	if(this != NULL && tipoPasajero != NULL)
 	{
-		retornooo = 0;
+		retorna = 0;
 		*tipoPasajero = this->tipoPasajero;
 	}
-	return retornooo;
+	return retorna;
 }
 
 int Passenger_setPrecio(Passenger* this,float precio)
 {
-	int retornooo = -1;
+	int retorna = -1;
 
 	if(this != NULL && precio > 0)
 	{
-		retornooo = 0;
+		retorna = 0;
 		this->precio = precio;
 	}
-	return retornooo;
+	return retorna;
 }
 
 int Passenger_getPrecio(Passenger* this,float* precio)
 {
-	int retornooo = -1;
+	int retorna = -1;
 
 	if(this != NULL && precio != NULL)
 	{
-		retornooo = 0;
+		retorna = 0;
 		*precio = this->precio;
 	}
-	return retornooo;
+	return retorna;
 }
 
 
 int Passenger_setEstado(Passenger* this,int estado)
 {
-	int retornooo = -1;
+	int retorna = -1;
 
 	if(this != NULL && estado > 0)
 	{
-		retornooo = 0;
+		retorna = 0;
 		this->estadoVuelo = estado;
 	}
-	return retornooo;
+	return retorna;
 }
 
 int Passenger_getEstado(Passenger* this,int* estado)
 {
-	int retornooo = -1;
+	int retorna = -1;
 
 	if(this != NULL && estado != NULL)
 	{
-		retornooo = 0;
+		retorna = 0;
 		*estado = this->estadoVuelo;
 	}
-	return retornooo;
+	return retorna;
 }
 
 int Passenger_changeTipoPasajeroToInt(char* tipoPasajero)
 {
-	int retornooo = -1;
+	int retorna = -1;
 	if(tipoPasajero != NULL)
 	{
-		retornooo = 0;
+		retorna = 0;
 		if(strcmp(tipoPasajero, "FirstClass")==0)
 		{
-			strcpy(tipoPasajero, PrimeraClase);
-			retornooo = 1;
+			strcpy(tipoPasajero, FIRST_CLASS);
+			retorna = 1;
 		}
 		else
 		{
 			if(strcmp(tipoPasajero, "ExecutiveClass")==0)
 			{
-				strcpy(tipoPasajero, ClaseExclusiva);
-				retornooo = 1;
+				strcpy(tipoPasajero, EXECUTIVE_CLASS);
+				retorna = 1;
 			}
 			else
 			{
-				strcpy(tipoPasajero, ClaseEconomica);
-				retornooo = 1;
+				strcpy(tipoPasajero, ECONOMY_CLASS);
+				retorna = 1;
 			}
 		}
 	}
-	return retornooo;
+	return retorna;
 }
 
-int Passenger_showTipoPasajero(char* tipoPasajero, int numeroTipoPasajero)
+int Passenger_showTipoPasajero(char* tipoPasajero, int numberTipoPasajero)
 {
-	int retornooo = -1;
-	if(tipoPasajero != NULL && numeroTipoPasajero > 0)
+	int retorna = -1;
+	if(tipoPasajero != NULL && numberTipoPasajero > 0)
 	{
-		retornooo = 0;
-		switch(numeroTipoPasajero)
+		retorna = 0;
+		switch(numberTipoPasajero)
 		{
 			case 1:
 				strcpy(tipoPasajero, "EconomyClass");
-				retornooo = 1;
+				retorna = 1;
 				break;
 			case 2:
 				strcpy(tipoPasajero, "ExecutiveClass");
-				retornooo = 1;
+				retorna = 1;
 				break;
 			case 3:
 				strcpy(tipoPasajero, "FirstClass");
-				retornooo = 1;
+				retorna = 1;
 				break;
 		}
 	}
-	return retornooo;
+	return retorna;
 }
 
 int Passenger_changeEstadoVueloToInt(char* estadoVuelo)
 {
-	int retornoo = -1;
+	int retorna = -1;
 	if(estadoVuelo != NULL)
 	{
-		retornoo = 0;
+		retorna = 0;
 		if(strcmp(estadoVuelo, "Aterrizado")==0)
 		{
-			strcpy(estadoVuelo, EstadoAterrizaje);
-			retornoo = 1;
+			strcpy(estadoVuelo, ATERRIZADO_STATUS);
+			retorna = 1;
 		}
 		else
 		{
 			if(strcmp(estadoVuelo, "En Horario")==0)
 			{
-				strcpy(estadoVuelo, EstatusEnHora);
-				retornoo = 1;
+				strcpy(estadoVuelo, EN_HORARIO_STATUS);
+				retorna = 1;
 			}
 			else
 			{
 				if(strcmp(estadoVuelo, "En Vuelo")==0)
 				{
-					strcpy(estadoVuelo, EstatusEnVuelo);
-					retornoo = 1;
+					strcpy(estadoVuelo, EN_VUELO_STATUS);
+					retorna = 1;
 				}
 				else
 				{
-					strcpy(estadoVuelo, EstatusDemora);
-					retornoo = 1;
+					strcpy(estadoVuelo, DEMORADO_STATUS);
+					retorna = 1;
 				}
 			}
 		}
 	}
-	return retornoo;
+	return retorna;
 }
 
-int Passenger_showEstadoVuelo(char* estadoVuelo, int numeroEstadoVuelo)
+int Passenger_showEstadoVuelo(char* estadoVuelo, int numberEstadoVuelo)
 {
-	int retornoo = -1;
-	if(estadoVuelo != NULL && numeroEstadoVuelo > 0)
+	int retorna = -1;
+	if(estadoVuelo != NULL && numberEstadoVuelo > 0)
 	{
-		retornoo = 0;
-		switch(numeroEstadoVuelo)
+		retorna = 0;
+		switch(numberEstadoVuelo)
 		{
 			case 1:
 				strcpy(estadoVuelo, "Aterrizado");
-				retornoo = 1;
+				retorna = 1;
 				break;
 			case 2:
 				strcpy(estadoVuelo, "Demorado");
-				retornoo = 1;
+				retorna = 1;
 				break;
 			case 3:
 				strcpy(estadoVuelo, "En Horario");
-				retornoo = 1;
+				retorna = 1;
 				break;
 			case 4:
 				strcpy(estadoVuelo, "En Vuelo");
-				retornoo = 1;
+				retorna = 1;
 				break;
 		}
 	}
-	return retornoo;
+	return retorna;
 }

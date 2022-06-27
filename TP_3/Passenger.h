@@ -51,9 +51,9 @@ int Passenger_compareByTypePassenger(void* p1, void* p2);
 int Passenger_compareByStatusFlight(void* p1, void* p2);
 
 int Passenger_changeTipoPasajeroToInt(char* tipoPasajero);
-int Passenger_showTipoPasajero(char* tipoPasajero, int numeroTipoPasajero);
+int Passenger_showTipoPasajero(char* tipoPasajero, int numberTipoPasajero);
 
 int Passenger_changeEstadoVueloToInt(char* estadoVuelo);
-int Passenger_showEstadoVuelo(char* estadoVuelo, int numeroEstadoVuelo);
+int Passenger_showEstadoVuelo(char* estadoVuelo, int numberEstadoVuelo);
 
 #endif /* PASSENGER_H_ */
